@@ -2,7 +2,7 @@
 
 ### Demo Link
 
-A live demo of the project can be accessed at [Demo](https://spectrum-capable-shape.glitch.me/v1/users/create)
+A live demo of the project can be accessed at (https://spectrum-capable-shape.glitch.me/v1/users/create)
 
 ### Welcome Contributors
 
