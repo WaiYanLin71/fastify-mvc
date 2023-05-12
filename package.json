@@ -1,0 +1,24 @@
+{
+  "name": "fastify",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./public/assets/css/tailwind.css -o ./public/assets/css/index.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^6.10.1",
+    "@fastify/view": "^7.4.1",
+    "ejs": "^3.1.9",
+    "fastify": "^4.17.0",
+    "mongoose": "^7.1.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
+}
