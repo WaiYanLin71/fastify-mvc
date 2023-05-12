@@ -13,15 +13,19 @@ const fastify = Fastify({
     logger: true
 })
 
-fastify.register(fastifyStatic, {
-    root: path.join(__dirname, 'public'),
-})
-
 fastify.register(fastifyView, {
     engine: {
         ejs
     },
+    root: path.join(__dirname, 'public'),
+    includeViewExtension: true,
 });
+
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public'),
+})
+
 
 fastify.register(function (app, _, done) {
     userRoutes.forEach((config) => {
