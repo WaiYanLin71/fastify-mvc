@@ -1,12 +1,9 @@
-import { create } from "../controller/UserController.js";
-
-const createUser = {
-    method: 'GET',
-    url:'/users/create',
-    handler: create,
-    scheme:{},
-}
+import { create, index, store } from "../controller/UserController.js";
+import route from "../helper/route.js";
 
 export default [
-    createUser
+    route.get('/users/create', create),
+    route.post('/users', store),
+    route.get('/users', index)
+    // route.get('/users/:id', create),
 ]

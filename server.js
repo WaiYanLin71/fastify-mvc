@@ -15,29 +15,46 @@ const fastify = Fastify({
 
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
-  })
+})
 
 fastify.register(fastifyView, {
     engine: {
-      ejs
+        ejs
     },
-  });
-  
-fastify.register(function(app, _, done) {
+});
+
+fastify.register(function (app, _, done) {
     userRoutes.forEach((config) => {
         app.route(config)
     })
     done()
-  }, { prefix: '/v1' }) 
+}, { prefix: '/v1' })
+
+
+fastify.setErrorHandler(function (error, request, reply) {
+    if (error instanceof Fastify.errorCodes.FST_ERR_BAD_STATUS_CODE) {
+        // Log error
+        this.log.error(error)
+        // Send error response
+        reply.status(500).send({ ok: false })
+    } else {
+        // fastify will use parent error handler to handle this
+        reply.send(error)
+    }
+})
+
+const startServer = () => {
+    fastify.listen({ port: 3000 }, function (err, address) {
+        if (err) {
+            fastify.log.error(err)
+            process.exit(1)
+        }
+    })
+}
 
 connectDatabase((error) => {
     if (!error) {
-        fastify.listen({ port: 3000 }, function (err, address) {
-            if (err) {
-                fastify.log.error(err)
-                process.exit(1)
-            }
-        })
+        startServer()
     } else {
         console.log(error)
     }
