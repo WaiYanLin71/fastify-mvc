@@ -4,9 +4,13 @@
 
 A live demo of the project can be accessed at (https://seemly-holistic-nerve.glitch.me)
 
+- username: test@admin.com
+- password: password
+
 ### Installation Guide
 
 https://github.com/WaiYanLin71/fastify-mvc/blob/main/Installation.md
+
 
 ### Welcome Contributors
 
