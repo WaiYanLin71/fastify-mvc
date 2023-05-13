@@ -2,7 +2,7 @@
 
 ### Demo Link
 
-A live demo of the project can be accessed at (https://seemly-holistic-nerve.glitch.me)
+A live demo of the project can be accessed at https://believed-misty-yttrium.glitch.me/
 
 - username: test@admin.com
 - password: password
