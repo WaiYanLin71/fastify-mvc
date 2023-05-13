@@ -1,9 +1,18 @@
 import User from "../models/User.js";
 
-export const index = async (req, res) => {
+export const index = async (req, res, done) => {
     try {
-        const users = await User.find().select('-password');
-        return res.view('/user/index', { users });
+        const limit = 10;
+        const total = await User.count();
+        const totalPage = Math.ceil(total / limit);
+        const page =  parseInt(req.query.page) ? parseInt(req.query.page) : 1;
+        const skip = (page - 1) * limit
+        const users = await User.find().select('-password').skip(skip).limit(limit);
+        const links = {
+            previous: page < totalPage || page > totalPage ?  false  : `/v1/users?page=${page - 1}`,
+            next: totalPage > page ? `/v1/users?page=${page + 1}` : false,
+        }
+        await res.view('/user/index', { users, links });
     } catch (error) {
         console.log(error.message)
     }
@@ -14,10 +23,10 @@ export const store = async (req, res, done) => {
         const user = new User(req.body)
         await user.save();
         const { password, ...others } = user._doc
-        return res.send({ user: others })
+        res.send({ user: others })
     } catch (error) {
         if (error.code === 11000) {
-            return res.status(422).send({
+            res.status(422).send({
                 messages: [{
                     email: `The email ${req.body.email} is already registered`
                 }],
@@ -28,7 +37,7 @@ export const store = async (req, res, done) => {
 }
 
 export const create = (req, res) => {
-    return res.view('/user/create');
+    res.view('/user/create');
 }
 
 export const show = (req, res) => {

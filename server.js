@@ -1,3 +1,7 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
 import fastifyView from '@fastify/view'
 import Fastify from 'fastify'
 import connectDatabase from './database.js'
@@ -7,17 +11,13 @@ import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
 import fastifyStatic from '@fastify/static';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { StandaloneValidator } from '@fastify/ajv-compiler';
 import ajvFormat from 'ajv-formats';
 import * as dotenv from 'dotenv'
 import fastifyCookie from '@fastify/cookie';
+import { decryptToken } from './helper/jwt.js';
 dotenv.config();
 
-
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 const factory = StandaloneValidator({
     readMode: false,
     storeFunction(routeOpts, schemaValidationCode) {
@@ -40,13 +40,28 @@ const fastify = Fastify({
     }
 })
 
+fastify.addHook('preHandler', async (req, reply) => {
+    let user = false;
+    if (req.cookies.admin) {
+        try {
+            user = await decryptToken(req.cookies.admin)
+        } catch (error) {
+            await reply.status(440).cookie('amin', '', {
+                httpOnly: true,
+                path: '/',
+                expires: 0
+            }).redirect('/v1/auth/login')
+        }
+    }
+    reply.locals = {
+        user
+    }
+}, { prefix: '/v1/users' })
+
 fastify.register(fastifyCookie, {
-    secret: "my-secret", // for cookies signature
-    hook: 'onRequest', // set to false to disable cookie autoparsing or set autoparsing on any of the following hooks: 'onRequest', 'preParsing', 'preHandler', 'preValidation'. default: 'onRequest'
-    parseOptions: {}  // options for parsing cookies
+    secret: "my-secret",
+    parseOptions: {}
 })
-
-
 
 fastify.register(fastifyView, {
     engine: {
@@ -56,21 +71,12 @@ fastify.register(fastifyView, {
     includeViewExtension: true,
 });
 
-
 fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
 })
 
-fastify.addHook('preHandler', function (req, reply, done) {
-    reply.locals = {
-        user: false // it will be available in all views
-    }
-    done()
-})
-
 fastify.register(v1UserRoute, { prefix: '/v1' })
 fastify.register(v1AuthRoute, { prefix: '/v1' })
-
 
 fastify.ready().then(() => {
     console.log('App is wating to connect database.')
@@ -100,7 +106,7 @@ fastify.setErrorHandler(function (error, request, reply) {
 const startServer = () => {
     fastify.listen({ port: 3000 }, function (err, address) {
         if (err) {
-            // fastify.log.error(err)
+            fastify.log.error(err)
             process.exit(1)
         }
     })

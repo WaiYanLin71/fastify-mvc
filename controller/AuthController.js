@@ -1,14 +1,17 @@
-export const login = (req, reply) => {
+import { createToken } from "../helper/jwt.js";
+
+export const login =  (req, reply) => {
     return reply.view('auth/login')
 }
 
-export const authenticated = (req, reply) => {
+export const authenticated = async (req, reply) => {
     const { email, password } = req.body;
     const adminEmail = process.env.ADMIN_USER_EMAIL;
     const adminPassword = process.env.ADMIN_USER_PASSWORD;
 
     if (email === adminEmail && password === adminPassword) {
-        return reply.cookie('admin', adminEmail, {
+        const token = await createToken({ email, password });
+        return reply.cookie('admin', token, {
             httpOnly: true,
             path: '/',
         }).status(200)

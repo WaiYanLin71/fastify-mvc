@@ -2,8 +2,7 @@ import { create, destroy, index, store } from "../../controller/UserController.j
 import userStoreValidation from "../../validator/userStoreValidation.js";
 
 export default (fastify, opts, done) => {
-  fastify.addHook('onRequest', (req, reply, done) => {  
-    console.log(req.cookies)
+  fastify.addHook('preHandler', (req, reply, done) => {  
     if (!req.cookies.admin) {
       return reply.redirect('/v1/auth/login')
     }

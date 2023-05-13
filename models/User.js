@@ -9,8 +9,8 @@ const UserSchema = new Schema({
 
 const  User = mongoose.model('user', UserSchema);
 
-UserSchema.pre('save', function(next){
-    this.password = hash(this.password)
+UserSchema.pre('save', async function(next){
+    this.password = await hash(this.password)
     next()
 })
 
