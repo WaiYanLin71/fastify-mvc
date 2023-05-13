@@ -4,6 +4,10 @@
 
 A live demo of the project can be accessed at (https://seemly-holistic-nerve.glitch.me)
 
+### Installation Guide
+
+https://github.com/WaiYanLin71/fastify-mvc/blob/main/Installation.md
+
 ### Welcome Contributors
 
 We welcome contributions from developers who are interested in helping to improve the Fastify CRUD and Authentication project
