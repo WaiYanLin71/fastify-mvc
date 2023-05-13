@@ -10,19 +10,29 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tailwindcss -i ./public/assets/css/tailwind.css -o ./public/assets/css/index.css --watch",
-    "start": "node server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/ajv-compiler": "^3.5.0",
+    "@fastify/cookie": "^8.3.0",
+    "@fastify/env": "^4.2.0",
+    "@fastify/middie": "^8.2.0",
     "@fastify/static": "^6.10.1",
     "@fastify/view": "^7.4.1",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "alpinejs": "^3.12.1",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "fastify": "^4.17.0",
-    "mongoose": "^7.1.1"
+    "mongoose": "^7.1.1",
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "laravel-mix": "^6.0.49",

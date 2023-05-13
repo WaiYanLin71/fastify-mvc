@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { hash } from "../controller/bcrypt.js";
+import { hash } from "../helper/bcrypt.js";
 
 const UserSchema = new Schema({
     name: { type: String, required: true },

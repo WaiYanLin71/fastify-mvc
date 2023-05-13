@@ -1,18 +1,18 @@
 const route = {
-    get(url, handler, scheme = {}) {
+    get(url, handler, schemea = {}) {
         return {
             method: 'GET',
             url,
             handler,
-            scheme
+            schemea 
         }
     },
-    post(url, handler, scheme = {}) {
+    post(url, handler, schemea = {}) {
         return {
             method: 'POST',
             url,
             handler,
-            scheme
+            schemea
         }
     }
 }
