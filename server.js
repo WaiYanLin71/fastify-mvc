@@ -54,7 +54,10 @@ fastify.addHook('preHandler', async (req, reply) => {
         }
     }
     reply.locals = {
-        user
+        user,
+        request: {
+            query: req.query
+        }
     }
 }, { prefix: '/v1/users' })
 

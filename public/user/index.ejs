@@ -11,8 +11,8 @@
 <body class="bg-slate-200">
     <%- include('../partials/nav') %>
     <div class="container">
-        <div class="flex justify-between pt-8">
-            <div>
+        <div class="flex justify-between items-center pt-8">
+            <div class="flex">
               <!-- Previous Button -->
               <a href="<%= links.previous || '#'  %>" class="<%= links.previous || 'pointer-events-none' %> inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 Previous
@@ -21,6 +21,14 @@
               <a href="<%= links.next || '#'  %>" class="<%= links.next || 'pointer-events-none' %> inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                 Next
               </a>
+              <select id="sort" class="ml-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-none dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option >Sorting</option>
+                <option <%= request.query.sort == '1' ?  'selected' : '' %> value="1">Ascending</option>
+                <option <%= request.query.sort == '-1' ?   'selected' : '' %>  value="-1">Decending</option>
+              </select>
+              <form action="">
+                <input name="search" value="<%= request.query.search || '' %>" type="search" class="text-sm font-medium ml-3 w-[400px] h-full p-3 focus:outline-none bg-gray-50 border border-gray-300 text-gray-500 rounded-lg" placeholder="Search..">
+              </form>
             </div>
             <a href="/v1/users/create" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded flex">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -32,6 +40,7 @@
         <table class="table-auto min-w-full mt-10 bg-white shadow-md rounded mb-10">
             <thead>
               <tr>
+                <th class="px-4 py-4">No</th>
                 <th class="px-4 py-4">ID</th>
                 <th class="px-4 py-4">Name</th>
                 <th class="px-4 py-4">Email</th>
@@ -42,6 +51,7 @@
                 <% users.forEach((user,index) => { %>
                     <tr>
                       <td class="border px-4 py-2"><%= (index + 1) %></td>
+                      <td class="border px-4 py-2"><%= (user._id) %></td>
                       <td class="border px-4 py-2"><%= user.name %></td>
                       <td class="border px-4 py-2"><%= user.email %></td>
                       <td class="border px-4 py-2 flex justify-center">
@@ -61,5 +71,15 @@
             </tbody>
         </table>
     </div>
+    
+    <script>
+      document.querySelector('#sort').addEventListener('change', (e) => {
+          if(e.target.value) {
+            const url = new URL(window.location)
+              url.searchParams.set('sort', e.target.value)
+              window.location.href = url.href
+          }
+      })
+    </script>
 </body>
 </html>
