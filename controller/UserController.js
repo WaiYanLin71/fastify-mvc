@@ -8,8 +8,9 @@ export const index = async (req, res, done) => {
         const page =  parseInt(req.query.page) ? parseInt(req.query.page) : 1;
         const skip = (page - 1) * limit
         const users = await User.find().select('-password').skip(skip).limit(limit);
+        console.log(page,totalPage)
         const links = {
-            previous: page < totalPage || page > totalPage ?  false  : `/v1/users?page=${page - 1}`,
+            previous: page === 1 || page > totalPage ?  false  : `/v1/users?page=${page - 1}`,
             next: totalPage > page ? `/v1/users?page=${page + 1}` : false,
         }
         await res.view('/user/index', { users, links });
