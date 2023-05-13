@@ -1,4 +1,4 @@
-## Fastify CRUD and Authentication Project
+## Fastify CRUD and Authentication Project (Developing)
 
 ### Demo Link
 
