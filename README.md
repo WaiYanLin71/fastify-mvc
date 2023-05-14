@@ -2,7 +2,7 @@
 
 ### Demo Link
 
-A live demo of the project can be accessed at (https://seemly-holistic-nerve.glitch.me)
+A live demo of the project can be accessed at https://believed-misty-yttrium.glitch.me/
 
 - username: test@admin.com
 - password: password
@@ -11,6 +11,7 @@ A live demo of the project can be accessed at (https://seemly-holistic-nerve.gli
 
 https://github.com/WaiYanLin71/fastify-mvc/blob/main/Installation.md
 
+![image](https://github.com/WaiYanLin71/fastify-mvc/assets/100548663/99529901-e1b1-45f5-9755-c7f8f8797fee)
 
 ### Welcome Contributors
 
