@@ -182,7 +182,7 @@
     }
     axios.post('/v1/users', data)
       .then(res => {
-        location.href = '/v1/users'
+        location.href = `/v1/users?page=${res.data.pages}`
       }).catch(error => {
         console.log(error)
         if (error.response.status === 422) {

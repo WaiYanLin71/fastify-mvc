@@ -86,7 +86,6 @@ fastify.ready().then(() => {
 })
 
 fastify.setErrorHandler(function (error, request, reply) {
-
     if (error.validation) {
         const messages = error.validation.map((er) => {
             return {
