@@ -19,6 +19,7 @@
   "dependencies": {
     "@fastify/ajv-compiler": "^3.5.0",
     "@fastify/cookie": "^8.3.0",
+    "@fastify/cors": "^8.2.1",
     "@fastify/env": "^4.2.0",
     "@fastify/middie": "^8.2.0",
     "@fastify/static": "^6.10.1",

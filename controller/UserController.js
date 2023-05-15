@@ -84,9 +84,10 @@ export const update = async (req, res) => {
 
 export const destroy = async (req, res) => {
     try {
+        console.log(req.params.id,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         await User.findByIdAndDelete(req.params.id);
         return res.status(200).send({ message: 'The user is deleted' })
     } catch (error) {
-
+        console.log(error)
     }
 }

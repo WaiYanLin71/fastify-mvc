@@ -1,3 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="IE=edge"
+  >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <base href="/">
+  <title><%= title %></title>
+  <link
+    rel="stylesheet"
+    href="/assets/css/index.css"
+  >
+  <script src="/assets/js/app.js"></script>
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('dropdown', () => ({
+        open: false,
+  
+        toggle() {
+          this.open = !this.open
+        },
+        
+        logout() {
+          axios.post('/v1/auth/logout', {} ,{
+            headers: {
+              withCredentials :true
+            }
+          }).then((res) => {
+              location.href = '/v1/auth/login'
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+      }))
+    })
+  </script>
+</head>
+<body class="bg-slate-200">
 <nav class="bg-white">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
@@ -91,7 +136,7 @@
               <span class="sr-only">Open user menu</span>
               <img
                 class="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                src="../assets/image/icons8-bear-100.png"
                 alt=""
               >
             </button>
@@ -131,14 +176,13 @@
               tabindex="-1"
               id="user-menu-item-1"
             >Settings</a>
-            <a
+            <button
               @click="logout"
-              href="#"
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"
               tabindex="-1"
               id="user-menu-item-2"
-            >Sign out</a>
+            >Sign out</button>
           </div>
         </div>
         <% } %>
@@ -173,15 +217,3 @@
     </div>
   </div>
 </nav>
-
-<script>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('dropdown', () => ({
-      open: false,
-
-      toggle() {
-        this.open = !this.open
-      },
-    }))
-  })
-</script>

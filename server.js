@@ -16,6 +16,7 @@ import ajvFormat from 'ajv-formats';
 import * as dotenv from 'dotenv'
 import fastifyCookie from '@fastify/cookie';
 import { decryptToken } from './helper/jwt.js';
+import cors from '@fastify/cors'
 dotenv.config();
 
 const factory = StandaloneValidator({
@@ -46,11 +47,9 @@ fastify.addHook('preHandler', async (req, reply) => {
         try {
             user = await decryptToken(req.cookies.admin)
         } catch (error) {
-            await reply.status(440).cookie('amin', '', {
-                httpOnly: true,
-                path: '/',
-                expires: 0
-            }).redirect('/v1/auth/login')
+            await reply.status(440)
+                .clearCookie('admin')
+                .redirect('/v1/auth/login')
         }
     }
     reply.locals = {
@@ -60,6 +59,9 @@ fastify.addHook('preHandler', async (req, reply) => {
         }
     }
 }, { prefix: '/v1/users' })
+
+
+fastify.register(cors)
 
 fastify.register(fastifyCookie, {
     secret: "my-secret",
