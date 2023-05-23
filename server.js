@@ -19,12 +19,16 @@ import { decryptToken } from './helper/jwt.js';
 import cors from '@fastify/cors'
 dotenv.config();
 
-const factory = StandaloneValidator({
-    readMode: false,
-    storeFunction(routeOpts, schemaValidationCode) {
-        fs.writeFileSync(path.join(__dirname, 'c.js'), schemaValidationCode)
-    }
-})
+// const factory = StandaloneValidator({
+//     readMode: false,
+//     storeFunction(routeOpts, schemaValidationCode) {
+//         fs.writeFileSync(path.join(__dirname, 'c.js'), schemaValidationCode)
+//     }
+// })
+
+fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
+    return ajv.compile(schema)
+  })
 
 const fastify = Fastify({
     logger: true,
