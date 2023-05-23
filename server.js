@@ -21,9 +21,9 @@ dotenv.config();
 
 const factory = StandaloneValidator({
     readMode: false,
-    // storeFunction(routeOpts, schemaValidationCode) {
-    //     fs.writeFileSync(path.join(__dirname, 'c.js'), schemaValidationCode)
-    // }
+    storeFunction(routeOpts, schemaValidationCode) {
+        fs.writeFileSync(path.join(__dirname, 'c.js'), schemaValidationCode)
+    }
 })
 
 const fastify = Fastify({
