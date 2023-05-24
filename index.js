@@ -57,8 +57,8 @@ const fastify = Fastify({
 //     return ajv.compile(schema)
 // })
 
-fastify.get('/',  (req) => {
-    return req.redirect('/v1/users')
+fastify.get('/',  (req,reply) => {
+    return reply.redirect('/v1/users')
 })  
 
 fastify.addHook('preHandler', async (req, reply) => {
