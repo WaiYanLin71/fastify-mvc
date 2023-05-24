@@ -2,9 +2,9 @@
 
 ### Demo Link
 
-A live demo of the project can be accessed at https://waiting-polished-mallow.glitch.me/
+A live demo of the project can be accessed at (https://wy-dev.cyclic.app/v1/auth/login)
 
-- username: test@admin.com
+- username: admin@fastify.mvc
 - password: password
 
 ### Installation Guide
