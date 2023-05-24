@@ -6,11 +6,11 @@
   "engines": {
     "node": "18.x"
   },
-  "main": "server.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx tailwindcss -i ./public/assets/css/tailwind.css -o ./public/assets/css/index.css --watch",
-    "start": "node server.js",
+    "start": "node index.js",
     "server": "nodemon server.js"
   },
   "keywords": [],
