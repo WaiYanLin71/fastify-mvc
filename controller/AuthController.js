@@ -9,7 +9,7 @@ export const authenticated = async (req, reply) => {
     const adminEmail = process.env.ADMIN_USER_EMAIL;
     const adminPassword = process.env.ADMIN_USER_PASSWORD;
     
-    if (email === adminEmail && password === adminPassword) {
+    if (email === ('admin@fastify.mvc') && password === ('password')) {
         const token = await createToken({ email, password });
         const expirationDate = new Date();
         expirationDate.setHours(expirationDate.getHours() + 24);

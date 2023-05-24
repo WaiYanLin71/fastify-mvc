@@ -11,12 +11,23 @@ import fs from 'fs';
 import ejs from 'ejs';
 import path from 'path';
 import fastifyStatic from '@fastify/static';
-import { StandaloneValidator } from '@fastify/ajv-compiler';
+import AjvComplier ,{ StandaloneValidator } from '@fastify/ajv-compiler';
 import ajvFormat from 'ajv-formats';
 import * as dotenv from 'dotenv'
 import fastifyCookie from '@fastify/cookie';
 import { decryptToken } from './helper/jwt.js';
 import cors from '@fastify/cors'
+import Ajv from 'ajv';
+const factoryValidator = AjvComplier()
+const factorySerializer = AjvComplier({ jtdSerializer: true })
+const ajv = new Ajv({
+    removeAdditional: 'all',
+    useDefaults: true,
+    coerceTypes: 'array',
+    // any other options
+    // ...
+})
+
 dotenv.config();
 
 const factory = StandaloneValidator({
@@ -36,10 +47,19 @@ const fastify = Fastify({
     },
     schemaController: {
         compilersFactory: {
-            buildValidator: factory
+            buildValidator: factoryValidator,
+            buildSerializer: factorySerializer
         }
     }
 })
+
+// fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
+//     return ajv.compile(schema)
+// })
+
+fastify.get('/',  (req) => {
+    return req.redirect('/v1/users')
+})  
 
 fastify.addHook('preHandler', async (req, reply) => {
     let user = false;
