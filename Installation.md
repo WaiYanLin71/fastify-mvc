@@ -21,7 +21,7 @@ Install the required dependencies for your Fastify app by running the following 
 
 
 ```
-npm run start
+npm install
 ```
 
 
