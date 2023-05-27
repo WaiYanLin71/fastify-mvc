@@ -21,7 +21,7 @@ Install the required dependencies for your Fastify app by running the following 
 
 
 ```
-npm run start
+npm run install
 ```
 
 
@@ -47,7 +47,7 @@ If you want to enable Tailwind CSS development and watch for changes, you can ru
 
 
 ```
-npm run dev
+npm run mix:dev
 ```
 
 
