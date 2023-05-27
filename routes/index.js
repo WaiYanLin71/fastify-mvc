@@ -3,12 +3,10 @@ import v1AuthRoute from './v1/auth.js'
 import { decryptToken } from '../helper/jwt.js';
 
 export default (fastify) => {
-    fastify.get('/', (req, reply) => {
-        return reply.redirect('/v1/users')
-    });
+
     fastify.addHook('preHandler', async (req, reply) => {
         let user = false;
-        if ((/^\/v1\/(?!auth\b)[^/]+$/).test(req.url)) {
+        if ((/^\/v1\/(?!auth\b)[^/].*$/).test(req.url)) {
             if (req.cookies?.admin) {
                 try {
                     user = await decryptToken(req.cookies.admin)
@@ -19,7 +17,8 @@ export default (fastify) => {
                 }
             }
         }
-        reply.locals = {
+
+         reply.locals = {
             user,
             request: {
                 query: req.query
@@ -27,6 +26,9 @@ export default (fastify) => {
         }
     })
 
+    fastify.get('/', (req, reply) => {
+        return reply.redirect('/v1/users')
+    });
     fastify.register(v1UserRoute, { prefix: 'v1/users' })
     fastify.register(v1AuthRoute, { prefix: 'v1/auth' })
 }

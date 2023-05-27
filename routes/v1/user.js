@@ -9,7 +9,7 @@ export default (fastify, opts, done) => {
   });
   fastify.get('/', index)
   fastify.get('/create', create)
-  fastify.post('/users', { schema: userStoreValidation }, store)
+  fastify.post('/', { schema: userStoreValidation }, store)
   fastify.delete('/:id', destroy)
   done();
 }
