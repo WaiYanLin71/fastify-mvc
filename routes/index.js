@@ -26,9 +26,9 @@ export default (fastify) => {
         }
     })
 
-    fastify.get('/', (req, reply) => {
-        return reply.redirect('/v1/users')
-    });
+    // fastify.get('/', (req, reply) => {
+    //     return reply.redirect('/v1/users')
+    // });
     fastify.register(v1UserRoute, { prefix: 'v1/users' })
     fastify.register(v1AuthRoute, { prefix: 'v1/auth' })
 }

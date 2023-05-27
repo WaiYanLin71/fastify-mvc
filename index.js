@@ -35,6 +35,7 @@ kernel(fastify)
 router(fastify)
 errorHandler(fastify)(Fastify)
 
+
 const startServer = () => {
     fastify.listen({ port: 3000 }, function (err, address) {
         if (err) {

@@ -1,5 +1,10 @@
 export default (fastify) => {
     return (Fastify) => {
+        
+        fastify.setNotFoundHandler((request, reply) => {
+            reply.status(404).view('errors/404');
+          });
+
         fastify.setErrorHandler((error, request, reply) => {
             if (error.validation) {
                 const messages = error.validation.map((er) => {
