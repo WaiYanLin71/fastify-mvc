@@ -18,13 +18,11 @@ https://github.com/DevWaiYanLinn/fastify-mvc/blob/main/Installation.md
 
 ![image](https://github.com/WaiYanLin71/fastify-mvc/assets/100548663/99529901-e1b1-45f5-9755-c7f8f8797fee)
 
-### Welcome Contributors
-
-We welcome contributions from developers who are interested in helping to improve the Fastify CRUD and Authentication project
-
 ### Project Description
 
-The Fastify CRUD and Authentication project is a web application built using the Fastify framework in Node.js. It provides a RESTful API for managing resources with CRUD operations (Create, Read, Update, and Delete) and includes authentication to secure the endpoints. The project utilizes the following packages:
+Welcome to our open-source Node.js project! We are excited to have you onboard as a new learner and contributor. This project provides a supportive environment for you to dive into the world of Node.js and gain hands-on experience with a variety of popular technologies.
+
+In this project, we leverage the power of several key technologies:
 
 - **EJS**: EJS (Embedded JavaScript) is a templating engine for rendering dynamic HTML templates on the server-side.
 - **Axios**: Axios is a popular HTTP client library for making asynchronous HTTP requests from Node.js or browser.
