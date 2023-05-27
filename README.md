@@ -32,6 +32,7 @@ In this project, we leverage the power of several key technologies:
 - **MongoDB**: MongoDB is a NoSQL database used for storing and retrieving data in a flexible, scalable, and high-performance manner.
 - **Mongoose**: Mongoose is an Object Data Modeling (ODM) library for MongoDB and provides a straightforward way to work with MongoDB in Node.js.
 - **Ajv**: Ajv is a popular JSON schema validator for JavaScript. It provides a simple and efficient way to validate JSON data against a JSON schema.
+- **Alpine.js**: Alpine.js is a lightweight JavaScript framework that allows you to add interactivity to your web pages. It enables you to easily  manipulate the DOM and handle user interactions using declarative directives. With Alpine.js, you'll learn how to create dynamic and responsive user interfaces without the need for a complex JavaScript framework.
 
 ### Features
 
