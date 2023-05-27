@@ -41,12 +41,10 @@ export const index = async (req, res, done) => {
 
 export const store = async (req, res) => {
     try {
-        const total = await User.count();
-        const pages = Math.ceil(total / 10);
         const user = new User(req.body)
         await user.save();
         const { password, ...others } = user._doc
-        await res.status(200).send({ user: others, pages })
+        await res.status(200).send({ user: others })
     } catch (error) {
         if (error.code === 11000) {
             await res.status(422).send({
