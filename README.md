@@ -33,6 +33,7 @@ The Fastify CRUD and Authentication project is a web application built using the
 - **Fastify**: Fastify is a fast and low-overhead web framework for Node.js.
 - **MongoDB**: MongoDB is a NoSQL database used for storing and retrieving data in a flexible, scalable, and high-performance manner.
 - **Mongoose**: Mongoose is an Object Data Modeling (ODM) library for MongoDB and provides a straightforward way to work with MongoDB in Node.js.
+- **Ajv**: Ajv is a popular JSON schema validator for JavaScript. It provides a simple and efficient way to validate JSON data against a JSON schema.
 
 ### Features
 
