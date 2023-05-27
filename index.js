@@ -12,7 +12,6 @@ const factoryValidator = AjvComplier()
 const factorySerializer = AjvComplier({ jtdSerializer: true })
 global.mix = (path) => {
     const versionFile = JSON.parse(fs.readFileSync('./mix-manifest.json'))
-    console.log(versionFile[path],'===============================');
     return versionFile[path].replace(/^\/public/, '');
 }
 
