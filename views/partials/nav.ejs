@@ -13,7 +13,8 @@
   >
   <base href="/">
   <title><%= title %></title>
-  <script src="/assets/js/app.js"></script>
+  <!-- <script type="module" src="http://localhost:5173/app.js"></script> -->
+  <script src="<%= mix('/public/assets/js/app.js') %>"></script>
   <script>
     document.addEventListener('alpine:init', () => {
       Alpine.data('dropdown', () => ({
@@ -132,7 +133,7 @@
               <span class="sr-only">Open user menu</span>
               <img
                 class="h-8 w-8 rounded-full"
-                src="../assets/image/icons8-bear-100.png"
+                src="/assets/image/icons8-bear-100.png"
                 alt=""
               >
             </button>

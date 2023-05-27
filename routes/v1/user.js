@@ -1,5 +1,5 @@
 import { create, destroy, index, store } from "../../controller/UserController.js"
-import userStoreValidation from "../../validator/userStoreValidation.js";
+import userStoreValidation from "../../validator/userStoreValidation.js"
 
 export default (fastify, opts, done) => {
   fastify.addHook('preHandler', async (req, reply) => {  
@@ -7,9 +7,9 @@ export default (fastify, opts, done) => {
        await reply.redirect('/v1/auth/login')
     }
   });
-  fastify.get('/users', index)
-  fastify.get('/users/create', create)
+  fastify.get('/', index)
+  fastify.get('/create', create)
   fastify.post('/users', { schema: userStoreValidation }, store)
-  fastify.delete('/users/:id', destroy)
+  fastify.delete('/:id', destroy)
   done();
 }

@@ -6,8 +6,8 @@ export default (fastify, opts, done) => {
             await reply.redirect('/v1/users')
         }
       });
-    fastify.get('/auth/login', login)
-    fastify.post('/auth/login', authenticated)
-    fastify.post('/auth/logout', logout)
+    fastify.get('/login', login)
+    fastify.post('/login', authenticated)
+    fastify.post('/logout', logout)
     done();
 }

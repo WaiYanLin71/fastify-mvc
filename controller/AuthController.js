@@ -8,8 +8,8 @@ export const authenticated = async (req, reply) => {
     const { email, password } = req.body;
     const adminEmail = process.env.ADMIN_USER_EMAIL;
     const adminPassword = process.env.ADMIN_USER_PASSWORD;
-    
-    if (email === ('admin@fastify.mvc') && password === ('password')) {
+
+    if (email === adminEmail && password === adminPassword) {
         const token = await createToken({ email, password });
         const expirationDate = new Date();
         expirationDate.setHours(expirationDate.getHours() + 24);
@@ -17,7 +17,7 @@ export const authenticated = async (req, reply) => {
             httpOnly: true,
             path: '/',
             secure: true,
-            expires:expirationDate,
+            expires: expirationDate,
         }).status(200)
             .send({ messages: 'success' })
     }
@@ -26,9 +26,10 @@ export const authenticated = async (req, reply) => {
 
 export const logout = async (req, reply) => {
     try {
-        await reply.clearCookie('admin').status(200)
-        .send({ messages: 'success' })
-    }catch(error) {
+        await reply.clearCookie('admin')
+            .status(200)
+            .send({ messages: 'success' })
+    } catch (error) {
         console.log(error)
     }
 } 
