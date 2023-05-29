@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const connectDatabase = async (cb) => {
     const uri = process.env.APP_ENV === 'local' ? process.env.LOCAL_DATABASE : process.env.SERVER_DATABASE;
     try {
-        await mongoose.connect(process.env.LOCAL_DATABASE)
+        await mongoose.connect(uri)
         cb(false)
     } catch (error) {
         cb(error)
