@@ -27,4 +27,6 @@ export default (fastify) => {
     fastify.register(fastifyStatic, {
         root: path.resolve('public'),
     })
+    
+    fastify.get('/',(req, reply) => reply.redirect('/v1/users'))
 }
