@@ -14,30 +14,8 @@
   <base href="/">
   <title><%= title %></title>
   <!-- <script type="module" src="http://localhost:5173/app.js"></script> -->
+  <link rel="stylesheet" href="<%= mix('/public/assets/css/app.css') %>">
   <script src="<%= mix('/public/assets/js/app.js') %>"></script>
-  <script>
-    document.addEventListener('alpine:init', () => {
-      Alpine.data('dropdown', () => ({
-        open: false,
-  
-        toggle() {
-          this.open = !this.open
-        },
-        
-        logout() {
-          axios.post('/v1/auth/logout', {} ,{
-            headers: {
-              withCredentials :true
-            }
-          }).then((res) => {
-              location.href = '/v1/auth/login'
-          }).catch(error => {
-            console.log(error)
-          })
-        }
-      }))
-    })
-  </script>
 </head>
 <body class="bg-slate-200">
 <nav class="bg-white">
@@ -116,7 +94,7 @@
       </div>
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">    
         <!-- Profile dropdown -->
-        <% if (user) { %>
+        <% if (auth?.user) { %>
           <div
           class="relative ml-3"
           x-data="dropdown"

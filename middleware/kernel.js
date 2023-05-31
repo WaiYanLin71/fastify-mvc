@@ -24,6 +24,7 @@ export default (fastify) => {
         root: path.resolve('views'),
         includeViewExtension: true,
     });
+    
     fastify.register(fastifyStatic, {
         root: path.resolve('public'),
     })

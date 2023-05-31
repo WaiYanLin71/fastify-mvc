@@ -10,6 +10,7 @@ import errorHandler from './exception/errorHandler.js';
 dotenv.config();
 const factoryValidator = AjvComplier()
 const factorySerializer = AjvComplier({ jtdSerializer: true })
+
 global.mix = (path) => {
     const versionFile = JSON.parse(fs.readFileSync('./mix-manifest.json'))
     return versionFile[path].replace(/^\/public/, '');
@@ -35,20 +36,23 @@ kernel(fastify)
 router(fastify)
 errorHandler(fastify)(Fastify)
 
-
 const startServer = () => {
-    fastify.listen({ port: 3000 }, function (err, address) {
+    fastify.listen({ port: process.env.SERVER_PORT }, function (err, address) {
         if (err) {
             fastify.log.error(err)
             process.exit(1)
-        } else console.log('App is running at port 3000')
+        } else console.log(`App is running at port ${process.env.SERVER_PORT}`)
     })
 }
 
-connectDatabase((error) => {
-    if (!error) startServer()
-    else console.log(error)
+fastify.ready(() => {
+    connectDatabase((error) => {
+        if (!error) startServer()
+        else console.log(error)
+    })
 })
+
+
 
 // import Ajv from 'ajv';
 // import fs from 'fs';

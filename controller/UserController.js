@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import User from "../models/User.js";
 
 export const index = async (req, res, done) => {
@@ -27,12 +26,12 @@ export const index = async (req, res, done) => {
             .skip(skip)
             .limit(limit)
             .sort({ _id: req.query.sort ? req.query.sort : -1 });
-            
+
         const links = {
             previous: page === 1 || page > totalPage ? false : `/v1/users?page=${page - 1}&${queryString}`,
             next: totalPage > page ? `/v1/users?page=${page + 1}&${queryString}` : false,
         }
-        
+
         await res.view('/user/index', { users, links });
     } catch (error) {
         throw Error(error)
@@ -66,23 +65,34 @@ export const show = (req, res) => {
 }
 
 
-export const edit = (req, res) => {
-    res.send('hello');
+export const edit = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ messages: 'Not Found', success: true })
+        return res.view('/user/edit', {
+            user
+        })
+    } catch (error) {
+        return res.status(500).json(error)
+    }
 }
 
 
 export const update = async (req, res) => {
     try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body).select('-password');
+        const user = await User.findById(req.params.id);
+        if (user) await User.findByIdAndUpdate(req.params.id, { ...req.body })
+        else return res.status(404).json({ messages: 'Not Found User' })
+        return res.status(200).json({ messages: 'success' })
     } catch (error) {
-
+        return res.status(500).json(error)
     }
 }
 
 
 export const destroy = async (req, res) => {
     try {
-        console.log(req.params.id,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        console.log(req.params.id, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         await User.findByIdAndDelete(req.params.id);
         return res.status(200).send({ message: 'The user is deleted' })
     } catch (error) {

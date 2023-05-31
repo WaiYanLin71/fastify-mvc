@@ -1,0 +1,1 @@
+(()=>{"use strict";var e=document.querySelector("#email"),t=document.querySelector("#password");document.querySelector("#login-form").addEventListener("submit",(function(o){o.preventDefault(),axios.post("/v1/auth/login",{email:e.value,password:t.value}).then((function(){location.href="/v1/users"})).catch((function(){alert("User name or password wrong")}))}))})();

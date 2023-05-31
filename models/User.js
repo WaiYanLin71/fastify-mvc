@@ -14,4 +14,10 @@ UserSchema.pre('save', async function(next){
     next()
 })
 
+UserSchema.pre('findOneAndUpdate', function (next) {
+    if(this.password) this.password = hash(this.password)
+    else delete this.password
+    next();
+});
+
 export default User
