@@ -1,1 +1,63 @@
-(()=>{"use strict";function e(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,r){var t=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=t){var n,o,u,a,c=[],l=!0,i=!1;try{if(u=(t=t.call(e)).next,0===r){if(Object(t)!==t)return;l=!1}else for(;!(l=(n=u.call(t)).done)&&(c.push(n.value),c.length!==r);l=!0);}catch(e){i=!0,o=e}finally{try{if(!l&&null!=t.return&&(a=t.return(),Object(a)!==a))return}finally{if(i)throw o}}return c}}(e,t)||function(e,t){if(!e)return;if("string"==typeof e)return r(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);"Object"===n&&e.constructor&&(n=e.constructor.name);if("Map"===n||"Set"===n)return Array.from(e);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return r(e,t)}(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function r(e,r){(null==r||r>e.length)&&(r=e.length);for(var t=0,n=new Array(r);t<r;t++)n[t]=e[t];return n}var t=document.querySelector("#create-user"),n=document.querySelector("#name"),o=document.querySelector("#email"),u=document.querySelector("#password"),a=document.querySelectorAll(".error-message");t.addEventListener("submit",(function(r){a.forEach((function(e){e.innerText=""})),r.preventDefault();var t={name:n.value,email:o.value,password:u.value};axios.post("/v1/users",t).then((function(e){location.href="/v1/users"})).catch((function(r){console.log(r),422===r.response.status&&r.response.data.messages.forEach((function(r){var t=e(Object.entries(r)[0],2),n=t[0],o=t[1];document.querySelector("#error-".concat(n)).innerText=o}))}))}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	var __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+/*!*************************************!*\
+  !*** ./resources/js/user/create.js ***!
+  \*************************************/
+__webpack_require__.r(__webpack_exports__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var form = document.querySelector('#create-user');
+var name = document.querySelector('#name');
+var email = document.querySelector('#email');
+var password = document.querySelector('#password');
+var errorMessages = document.querySelectorAll('.error-message');
+var clearErrorMessage = function clearErrorMessage() {
+  errorMessages.forEach(function (el) {
+    el.innerText = '';
+  });
+};
+form.addEventListener('submit', function (e) {
+  clearErrorMessage();
+  e.preventDefault();
+  var data = {
+    name: name.value,
+    email: email.value,
+    password: password.value
+  };
+  axios.post('/v1/users', data).then(function (res) {
+    location.href = "/v1/users";
+  })["catch"](function (error) {
+    console.log(error);
+    if (error.response.status === 422) {
+      error.response.data.messages.forEach(function (item) {
+        var _Object$entries$ = _slicedToArray(Object.entries(item)[0], 2),
+          key = _Object$entries$[0],
+          value = _Object$entries$[1];
+        document.querySelector("#error-".concat(key)).innerText = value;
+      });
+    }
+  });
+});
+/******/ })()
+;

@@ -1,5 +1,6 @@
-import v1UserRoute from './v1/user.js'
-import v1AuthRoute from './v1/auth.js'
+import user from './v1/user.js'
+import auth from './v1/auth.js'
+import csv from './v1/csv.js'
 import { decryptToken } from '../helper/jwt.js';
 
 export default (fastify) => {
@@ -26,6 +27,7 @@ export default (fastify) => {
             }
         }
     })
-    fastify.register(v1UserRoute, { prefix: 'v1/users' })
-    fastify.register(v1AuthRoute, { prefix: 'v1/auth' })
+    fastify.register(user, { prefix: 'v1/users' })
+    fastify.register(auth, { prefix: 'v1/auth' })
+    fastify.register(csv, {prefix: 'v1/csv' })
 }

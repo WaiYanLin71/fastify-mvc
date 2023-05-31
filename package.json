@@ -30,6 +30,7 @@
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
+    "csv-writer": "^1.6.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "fastify": "^4.17.0",

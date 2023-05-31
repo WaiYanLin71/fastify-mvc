@@ -70,12 +70,16 @@
                 <input name="search" value="<%= request.query.search || '' %>" type="search" class="text-sm font-medium ml-3 w-[400px] h-full p-3 focus:outline-none bg-white border border-gray-300 text-gray-500 rounded-lg" placeholder="Search..">
               </form>
             </div>
-            <a href="/v1/users/create" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded flex">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> 
-                Create
-              </a>
+            <div class="flex justify-end items-center">
+                <a href="/v1/csv/export-user" download class="mr-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex">
+                    Download
+                <a href="/v1/users/create" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg> 
+                    Create
+                </a>
+            </div>
         </div>
         <table class="table-auto min-w-full mt-10 bg-white shadow-md rounded mb-10">
             <thead>

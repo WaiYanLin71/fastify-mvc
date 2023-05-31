@@ -10,13 +10,13 @@ const UserSchema = new Schema({
 const  User = mongoose.model('user', UserSchema);
 
 UserSchema.pre('save', async function(next){
-    this.password = await hash(this.password)
+    UserSchema.password = await hash(UserSchema.password)
     next()
 })
 
-UserSchema.pre('findOneAndUpdate', function (next) {
-    if(this.password) this.password = hash(this.password)
-    else delete this.password
+UserSchema.pre('findOneAndUpdate', async function (next) {
+    if(UserSchema.password) this.password = await hash(UserSchema.password)
+    else delete UserSchema.password
     next();
 });
 
