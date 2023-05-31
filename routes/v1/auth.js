@@ -1,11 +1,11 @@
 import { authenticated, login, logout } from "../../controller/AuthController.js";
 
 export default (fastify, opts, done) => {
-    fastify.addHook('preHandler', async (req, reply) => { 
-        if (req.cookies.admin && req.url === '/v1/auth/login') {
-            await reply.redirect('/v1/users')
-        }
-      });
+    fastify.addHook('preHandler', (req, reply, done) => {
+        if(reply.locals.auth?.user && req.method == 'GET') return reply.redirect('/v1/users')
+        done();
+    })
+    
     fastify.get('/login', login)
     fastify.post('/login', authenticated)
     fastify.post('/logout', logout)

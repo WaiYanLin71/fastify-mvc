@@ -7,27 +7,21 @@ import { dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url))
 import fastifyView from '@fastify/view'
+import { authenticated } from './authMiddleware.js';
 
 export default (fastify) => {
 
-    fastify.register(cors);
-
-    fastify.register(fastifyCookie, {
+    fastify.register(cors).register(fastifyCookie, {
         secret: "my-secret",
         parseOptions: {}
-    })
-
-    fastify.register(fastifyView, {
+    }).register(fastifyView, {
         engine: {
             ejs
         },
         root: path.resolve('views'),
         includeViewExtension: true,
-    });
-    
-    fastify.register(fastifyStatic, {
+    }).register(fastifyStatic, {
         root: path.resolve('public'),
-    })
-    
-    fastify.get('/',(req, reply) => reply.redirect('/v1/users'))
+    }).addHook('preHandler', authenticated)
+        .get('/', (req, reply) => reply.redirect('/v1/users'))
 }

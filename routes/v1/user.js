@@ -3,9 +3,6 @@ import  validate from "../../validator/user/index.js";
 import userStoreValidation from "../../validator/userStoreValidation.js"
 
 export default (fastify, opts, done) => {
-  fastify.addHook('preHandler', async (req, reply) => {  
-    if (!req.cookies.admin) return reply.redirect('/v1/auth/login')
-  });
   fastify.get('/', index)
   fastify.get('/create', create)
   fastify.post('/', { schema: userStoreValidation }, store)

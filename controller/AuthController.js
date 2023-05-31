@@ -1,4 +1,4 @@
-import { createToken } from "../helper/jwt.js";
+import JWTService from "../services/jwt-service.js";
 
 export const login = (req, reply) => {
     return reply.view('auth/login')
@@ -10,16 +10,18 @@ export const authenticated = async (req, reply) => {
     const adminPassword = process.env.ADMIN_USER_PASSWORD;
 
     if (email === adminEmail && password === adminPassword) {
-        const token = await createToken({ email, password });
+        const jwt = new JWTService({ data: { email, password } })
+        const token = await jwt.encrypt();
         const expirationDate = new Date();
         expirationDate.setHours(expirationDate.getHours() + 24);
+        
         await reply.cookie('admin', token, {
             httpOnly: true,
             path: '/',
             secure: true,
             expires: expirationDate,
         }).status(200)
-            .send({ messages: 'success' })
+          .send({ messages: 'success' })
     }
     await reply.status(422).send({ mseeages: 'fail' })
 }
